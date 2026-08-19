@@ -20,10 +20,11 @@ defmodule DevPulseLiveWeb.Router do
     get "/", PageController, :home
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", DevPulseLiveWeb do
-  #   pipe_through :api
-  # end
+  scope "/webhooks", DevPulseLiveWeb do
+    pipe_through :api
+
+    post "/github", WebhookController, :github
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:dev_pulse_live, :dev_routes) do

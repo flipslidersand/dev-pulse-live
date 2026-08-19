@@ -20,6 +20,14 @@ if System.get_env("PHX_SERVER") do
   config :dev_pulse_live, DevPulseLiveWeb.Endpoint, server: true
 end
 
+config :dev_pulse_live,
+  github_token: System.get_env("GITHUB_TOKEN", ""),
+  github_webhook_secret: System.get_env("GITHUB_WEBHOOK_SECRET", "dev_secret"),
+  github_actor: System.get_env("GITHUB_ACTOR", "")
+
+config :dev_pulse_live, DevPulseLive.ActivityFeed.Poller,
+  interval_ms: String.to_integer(System.get_env("POLLER_INTERVAL_MS", "300000"))
+
 config :dev_pulse_live, DevPulseLiveWeb.Endpoint,
   http: [port: String.to_integer(System.get_env("PORT", "4000"))]
 

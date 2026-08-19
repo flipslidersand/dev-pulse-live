@@ -12,9 +12,7 @@ defmodule DevPulseLive.Application do
       DevPulseLive.Repo,
       {DNSCluster, query: Application.get_env(:dev_pulse_live, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: DevPulseLive.PubSub},
-      # Start a worker by calling: DevPulseLive.Worker.start_link(arg)
-      # {DevPulseLive.Worker, arg},
-      # Start to serve requests, typically the last entry
+      DevPulseLive.ActivityFeed.Poller,
       DevPulseLiveWeb.Endpoint
     ]
 

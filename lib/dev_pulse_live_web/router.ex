@@ -17,7 +17,7 @@ defmodule DevPulseLiveWeb.Router do
   scope "/", DevPulseLiveWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", DashboardLive
   end
 
   scope "/webhooks", DevPulseLiveWeb do

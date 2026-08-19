@@ -3,6 +3,9 @@ primary_region = "nrt"
 
 [build]
 
+[deploy]
+  release_command = "/app/bin/dev_pulse_live eval 'DevPulseLive.Release.migrate()'"
+
 [env]
   PHX_HOST    = "dev-pulse-live.fly.dev"
   PHX_SERVER  = "true"

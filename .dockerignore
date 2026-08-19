@@ -1,0 +1,8 @@
+.git
+_build
+deps
+.elixir_ls
+.env
+.env.local
+*.png
+priv/static/assets

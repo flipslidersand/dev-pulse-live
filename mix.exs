@@ -12,7 +12,7 @@ defmodule DevPulseLive.MixProject do
       deps: deps(),
       compilers: [:phoenix_live_view] ++ Mix.compilers(),
       listeners: [Phoenix.CodeReloader],
-      test_coverage: [summary: [threshold: 0]]
+      test_coverage: [summary: [threshold: 70]]
     ]
   end
 

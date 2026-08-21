@@ -4,8 +4,9 @@ defmodule DevPulseLive.Github.Client do
   def fetch_events(actor, etag \\ nil) do
     token = Application.get_env(:dev_pulse_live, :github_token, "")
     headers = build_headers(token, etag)
+    opts = [headers: headers] ++ req_opts()
 
-    case Req.get("#{@base_url}/users/#{actor}/events", headers: headers) do
+    case Req.get("#{@base_url}/users/#{actor}/events", opts) do
       {:ok, %{status: 304}} ->
         {:ok, :not_modified}
 
@@ -24,6 +25,13 @@ defmodule DevPulseLive.Github.Client do
 
       {:error, reason} ->
         {:error, reason}
+    end
+  end
+
+  defp req_opts do
+    case Application.get_env(:dev_pulse_live, :req_plug) do
+      nil -> []
+      plug -> [plug: plug, retry: false]
     end
   end
 

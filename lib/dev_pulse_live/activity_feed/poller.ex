@@ -14,10 +14,10 @@ defmodule DevPulseLive.ActivityFeed.Poller do
 
   @impl true
   def init(_opts) do
-    interval =
-      Application.get_env(:dev_pulse_live, __MODULE__, [])[:interval_ms] || @default_interval_ms
-
-    send(self(), :poll)
+    cfg = Application.get_env(:dev_pulse_live, __MODULE__, [])
+    interval = cfg[:interval_ms] || @default_interval_ms
+    initial_delay = cfg[:initial_delay_ms] || 0
+    Process.send_after(self(), :poll, initial_delay)
     {:ok, %{interval_ms: interval, etag: nil}}
   end
 

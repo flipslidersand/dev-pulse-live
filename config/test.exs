@@ -41,3 +41,9 @@ config :phoenix_live_view,
 # Sort query params output of verified routes for robust url comparisons
 config :phoenix,
   sort_verified_routes_query_params: true
+
+# Prevent Poller from polling during tests (avoids Req.Test stub lookup failures)
+config :dev_pulse_live, DevPulseLive.ActivityFeed.Poller, initial_delay_ms: 3_600_000
+
+# Allow Github.Client to use Req.Test in tests
+config :dev_pulse_live, :req_plug, {Req.Test, DevPulseLive.Github.Client}
